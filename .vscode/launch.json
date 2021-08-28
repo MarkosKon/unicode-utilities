@@ -1,0 +1,40 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "args": ["/e/google-fonts-repo/repo/apache/aclonica/Aclonica-Regular.ttf"]
+    },
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Launch Program",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}\\bin\\ff",
+      // "args": [
+      //   "-pt",
+      //   "60",
+      //   "-f",
+      //   "windows-fonts-characters.txt",
+      //   "-u",
+      //   "E0-EE, A0-AF"
+      // ]
+      // "args": ["-pt", "60", "-f", "windows-fonts-characters.txt", "-u", "U+00-FF"]
+      "args": [
+        "-pt",
+        "60",
+        "-f",
+        "google-fonts-characters.txt",
+        "-u",
+        "U+20-22, U+24-3E, U+40, U+5B-5F, U+7C, U+A0, U+A7, U+A9, U+AB, U+BB, U+301, U+308, U+386, U+388-38A, U+38C, U+38E-3A1, U+3A3-3CE, U+2010-2011, U+2013-2014, U+2026, U+2030, U+20AC"
+      ]
+    }
+  ]
+}
