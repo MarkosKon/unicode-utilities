@@ -15,24 +15,24 @@ yargs(hideBin(process.argv))
     command: "$0 [options] [font_file..]",
     // command: "$0 [options] -u <unicode_ranges> [font_file..]",
     description:
-      "List fonts that support the given unicode range.",
+      "List fonts that support the given Unicode range.",
     builder: (yargs) => {
       return yargs
         .positional("font-files", {
-          describe: "The font files you want to check if they support the unicode range. Tip: for faster search, consider creating a file database with: 'find DIRECTORY -type f -name *ttf -print0 | xargs -0 printchars --separator = > fonts-db.txt'.",
+          describe: "The font files you want to check if they support the Unicode range. Tip: for faster search, consider creating a file database with: 'find DIRECTORY -type f -name *ttf -print0 | xargs -0 printchars --separator = > fonts-db.txt'.",
           type: "string",
         })
         .example(
           "$0 -f file-db.txt -u U+AA-FF",
-          `Prints which fonts from the file db support the given unicode ranges.`
+          `Prints which fonts from the file db support the given Unicode ranges.`
         )
         .example(
           "$0 -pt 60 -f file-db.txt -u U+00-FF",
-          "Prints the fonts that cover at least 60% of the characters for the given unicode range."
+          "Prints the fonts that cover at least 60% of the characters for the given Unicode range."
         )
         .example(
           'find DIRECTORY -type f -name "*ttf" -print0 | xargs -0 $0 -u U+41-5A 61-7A U+AA-FF --',
-          "Prints which of the font files support the given unicode ranges. Use -- after the -u option to denote the end of the unicode ranges. This is because we have two arguments that are variable in size: the unicode ranges and the fonts files. The -u option should be last."
+          "Prints which of the font files support the given Unicode ranges. Use -- after the -u option to denote the end of the Unicode ranges. This is because we have two arguments that are variable in size: the Unicode ranges and the fonts files. The -u option should be last."
         )
         .example(
           "$0 -u U+41-5A 61-7A U+AA-FF -- DIRECTORY/*ttf",
@@ -78,23 +78,23 @@ yargs(hideBin(process.argv))
   })
   .option("partial", {
     alias: "p",
-    describe: "Returns fonts that partially support the given unicode ranges.",
+    describe: "Returns fonts that partially support the given Unicode ranges.",
     type: "boolean",
     default: false,
   })
   .option("partial-threshold", {
     alias: "t",
     describe:
-      "The percentage of the accepted character coverage for the given unicode ranges. It needs the -p or --partial option for it to work.",
+      "The percentage of the accepted character coverage for the given Unicode ranges. It needs the -p or --partial option for it to work.",
     type: "number",
     // implies: "p",
     default: 50,
   })
   .option("unicode-ranges", {
     alias: "u",
-    describe: "The unicode ranges to search for inside the files or the file db.",
+    describe: "The Unicode ranges to search for inside the files or the file db.",
     demandOption:
-      "The unicode ranges are required. Pass them with -u or --unicode-ranges.",
+      "The Unicode ranges are required. Pass them with -u or --unicode-ranges.",
     type: "array",
   })
   .option("verbose", {

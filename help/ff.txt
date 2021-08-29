@@ -1,9 +1,9 @@
 ff [options] [font_file..]
 
-List fonts that support the given unicode range.
+List fonts that support the given Unicode range.
 
 Positionals:
-  font-files  The font files you want to check if they support the unicode
+  font-files  The font files you want to check if they support the Unicode
               range. Tip: for faster search, consider creating a file database
               with: 'find DIRECTORY -type f -name *ttf -print0 | xargs -0
               printchars --separator = > fonts-db.txt'.                 [string]
@@ -28,30 +28,29 @@ Options:
                                     with the file's separator.
                                                          [string] [default: "="]
   -p, --partial                     Returns fonts that partially support the
-                                    given unicode ranges.
+                                    given Unicode ranges.
                                                       [boolean] [default: false]
   -t, --partial-threshold           The percentage of the accepted character
-                                    coverage for the given unicode ranges. It
+                                    coverage for the given Unicode ranges. It
                                     needs the -p or --partial option for it to
                                     work.                 [number] [default: 50]
-  -u, --unicode-ranges              The unicode ranges to search for inside the
+  -u, --unicode-ranges              The Unicode ranges to search for inside the
                                     files or the file db.     [array] [required]
   -V, --verbose                     Print extra information.           [boolean]
 
 Examples:
-  ff -f file-db.txt -u U+AA-FF              Returns which fonts from the files
-                                            you provide or the file db support
-                                            the given unicode ranges.
-  ff -pt 60 -f file-db.txt -u U+00-FF       Returns the fonts that cover at
-                                            least 60% of the characters for the
-                                            given unicode range.
-  find DIRECTORY -type f -name "*ttf"       Returns which of the font files
-  -print0 | xargs -0 ff -u U+41-5A 61-7A    support the given unicode ranges.
+  ff -f file-db.txt -u U+AA-FF              Prints which fonts from the file db
+                                            support the given Unicode ranges.
+  ff -pt 60 -f file-db.txt -u U+00-FF       Prints the fonts that cover at least
+                                            60% of the characters for the given
+                                            Unicode range.
+  find DIRECTORY -type f -name "*ttf"       Prints which of the font files
+  -print0 | xargs -0 ff -u U+41-5A 61-7A    support the given Unicode ranges.
   U+AA-FF --                                Use -- after the -u option to denote
-                                            the end of the unicode ranges. This
+                                            the end of the Unicode ranges. This
                                             is because we have two arguments
                                             that are variable in size: the
-                                            unicode ranges and the fonts files.
+                                            Unicode ranges and the fonts files.
                                             The -u option should be last.
   ff -u U+41-5A 61-7A U+AA-FF --            Same as above but without the find
   DIRECTORY/*ttf                            command.
