@@ -1,6 +1,6 @@
 # Unicode Utilities
 
-Command line utilities to help you when you work with Unicode related stuff.
+Command line utilities to help you with Unicode/font stuff.
 
 - `c2n` (Character to number) prints the code points of the given characters. It can also do the opposite, and it can work with hex numbers too. See the [help menu for usage and examples](help/c2n.txt).
 - `ur2n`, (Unicode range to number) prints the code points for the given Unicode ranges. See the [help menu for usage and examples](help/ur2n.txt).
