@@ -60,7 +60,7 @@ ${chalk.bold("EXAMPLES:")}
   ur2n U+AA-FF 400-500     Prints the code points for multiple ranges.
 
 Made by Markos Konstantopoulos https://markoskon.com. For bugs and new
-features, please open an issue at TODO.
+features, please open an issue at https://github.com/MarkosKon/unicode-utilities/issues.
 `)
 }
 

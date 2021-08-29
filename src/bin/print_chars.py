@@ -3,7 +3,7 @@
 from argparse import ArgumentParser, BooleanOptionalAction
 from fontTools.ttLib.ttFont import TTFont
 
-parser = ArgumentParser(description='Print the code points of the given font files. More specifically, for each file you provide, the program prints a line with 3 fields (space separated by default): the font path, the font name, and the code points. The code points are comma separated.', prog='printchars')
+parser = ArgumentParser(description='Print the code points of the given font files. More specifically, for each file you provide, the program prints a line with 3 fields (space separated by default): the font path, the font name, and the code points. The code points are comma separated.', prog='printchars', epilog='Made by Markos Konstantopoulos https://markoskon.com. For bugs and features requests, please open an issue at https://github.com/MarkosKon/unicode-utilities/issues.')
 parser.add_argument('files',
                     metavar='FILE',
                     type=str,

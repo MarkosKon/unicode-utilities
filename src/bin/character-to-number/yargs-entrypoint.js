@@ -35,8 +35,9 @@ yargs(hideBin(process.argv))
                     "$0 -rh e4 e5 u+e6 U+B2",
                     "Hex number to character conversion. The hex numbers can also start with U+."
                 )
+                // TODO: Needs tests to check for edge cases, for example, non-printable character conversion.
                 .epilog(
-                    `Made by Markos Konstantopoulos https://markoskon.com. TODO: Needs tests to check for edge cases, for example, non-printable character conversion.`
+                    `Made by Markos Konstantopoulos https://markoskon.com. For bugs and features requests, please open an issue at https://github.com/MarkosKon/unicode-utilities/issues.`
                 );
         },
         handler: (argv) => characterToNumber(argv),

@@ -47,7 +47,7 @@ yargs(hideBin(process.argv))
           "Same as above but for more characters."
         )
         .epilog(
-          `Made by Markos Konstantopoulos https://markoskon.com. For bugs and features requests, please open an issue at TODO.`
+          `Made by Markos Konstantopoulos https://markoskon.com. For bugs and features requests, please open an issue at https://github.com/MarkosKon/unicode-utilities/issues.`
         );
     },
     handler: (argv) => findFonts(argv),

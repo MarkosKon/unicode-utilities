@@ -9,6 +9,13 @@
     "ur2n": "./src/bin/unicode-range-to-number.js",
     "printchars": "./src/bin/print_chars.py"
   },
+  "scripts": {
+    "dump:help": "run-p dump:c2n:help dump:ff:help dump:ur2n:help dump:printchars:help",
+    "dump:c2n:help": "node ./src/bin/character-to-number/yargs-entrypoint.js --help > help/c2n.txt",
+    "dump:ff:help": "node ./src/bin/find-fonts/yargs-entrypoint.js --help > help/ff.txt",
+    "dump:ur2n:help": "node ./src/bin/unicode-range-to-number.js --help > help/ur2n.txt",
+    "dump:printchars:help": "python ./src/bin/print_chars.py --help > help/printchars.txt"
+  },
   "dependencies": {
     "chalk": "^4.1.2",
     "lodash": "^4.17.21",
@@ -19,6 +26,7 @@
     "@types/lodash": "^4.14.172",
     "@types/node": "^16.7.3",
     "@types/ramda": "^0.27.44",
-    "@types/yargs": "^17.0.2"
+    "@types/yargs": "^17.0.2",
+    "npm-run-all": "^4.1.5"
   }
 }

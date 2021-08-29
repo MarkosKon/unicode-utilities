@@ -1,0 +1,29 @@
+usage: printchars [-h] [--separator SEP]
+                  [--only-codepoints | --no-only-codepoints | -o]
+                  [--verbose | --no-verbose | -V]
+                  FILE [FILE ...]
+
+Print the code points of the given font files. More specifically, for each
+file you provide, the program prints a line with 3 fields (space separated by
+default): the font path, the font name, and the code points. The code points
+are comma separated.
+
+positional arguments:
+  FILE                  The files you want to parse.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --separator SEP, -s SEP
+                        How to separate the 3 fields in a line. The fields are
+                        the path, the font name, and the code points comma-
+                        separated. Use it when your paths have spaces, where
+                        the default space separator won't work well.
+  --only-codepoints, --no-only-codepoints, -o
+                        Print only 1 field in a line, the code points.
+                        (default: False)
+  --verbose, --no-verbose, -V
+                        Print extra information. (default: False)
+
+Made by Markos Konstantopoulos https://markoskon.com. For bugs and features
+requests, please open an issue at https://github.com/MarkosKon/unicode-
+utilities/issues.
