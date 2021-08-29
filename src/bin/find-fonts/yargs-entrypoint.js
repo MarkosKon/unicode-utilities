@@ -24,15 +24,15 @@ yargs(hideBin(process.argv))
         })
         .example(
           "$0 -f file-db.txt -u U+AA-FF",
-          `Returns which fonts from the files you provide or the file db support the given unicode ranges.`
+          `Prints which fonts from the file db support the given unicode ranges.`
         )
         .example(
           "$0 -pt 60 -f file-db.txt -u U+00-FF",
-          "Returns the fonts that cover at least 60% of the characters for the given unicode range."
+          "Prints the fonts that cover at least 60% of the characters for the given unicode range."
         )
         .example(
           'find DIRECTORY -type f -name "*ttf" -print0 | xargs -0 $0 -u U+41-5A 61-7A U+AA-FF --',
-          "Returns which of the font files support the given unicode ranges. Use -- after the -u option to denote the end of the unicode ranges. This is because we have two arguments that are variable in size: the unicode ranges and the fonts files. The -u option should be last."
+          "Prints which of the font files support the given unicode ranges. Use -- after the -u option to denote the end of the unicode ranges. This is because we have two arguments that are variable in size: the unicode ranges and the fonts files. The -u option should be last."
         )
         .example(
           "$0 -u U+41-5A 61-7A U+AA-FF -- DIRECTORY/*ttf",
