@@ -11,6 +11,8 @@ Command line utilities to help you with Unicode/font stuff.
 
 `npm install -g unicode-utilities`
 
+`printchars` and `ff` also need python3.9 and the pip packages `fonttools` and `Brotli`.
+
 ## Run
 
 Run one of the utilities in your command line:
