@@ -1,8 +1,19 @@
 {
   "name": "unicode-utilities",
+  "description": "Command line utilities to help you with Unicode/font stuff.",
   "version": "1.0.0",
   "license": "MIT",
-  "private": true,
+  "repository": "MarkosKon/unicode-utilities",
+  "keywords": [
+    "unicode",
+    "fonts",
+    "cli",
+    "command-line"
+  ],
+  "author": {
+    "name": "Markos Konstantopoulos",
+    "url": "https://markoskon.com"
+  },
   "bin": {
     "c2n": "./src/bin/character-to-number/yargs-entrypoint.js",
     "ff": "./src/bin/find-fonts/yargs-entrypoint.js",

@@ -9,14 +9,20 @@ Command line utilities to help you with Unicode/font stuff.
 
 ## Installation
 
-- Clone the repo `git clone https://github.com/MarkosKon/unicode-utilities.git`
-- Change the directory `cd unicode-utilities`.
-- Run one of the 4 executables.
-- Or install it globally with `npm link`.
+`npm install -g unicode-utilities`
+
+## Run
+
+Run one of the utilities in your command line:
+
+- `c2n --help`
+- `ur2n --help`
+- `printchars --help`
+- `ff --help`
 
 ## Usage
 
-See the help menu for each utility. See also the [recipes](recipes.md).
+See the help menu below for each utility. See also the [recipes](recipes.md).
 
 - [c2n help menu](help/c2n.txt)
 - [ur2n help menu](help/ur2n.txt)
