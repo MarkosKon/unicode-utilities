@@ -24,7 +24,7 @@ Run one of the utilities in your command line:
 
 ## Usage
 
-See the help menu below for each utility. See also the [recipes](recipes.md).
+See the help menu below for each utility.
 
 - [c2n help menu](help/c2n.txt)
 - [ur2n help menu](help/ur2n.txt)
