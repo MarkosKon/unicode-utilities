@@ -33,7 +33,8 @@ const main = ({ args, reverse, hex, appendUPlus, verbose }) => {
           }`
           : `${character}`;
         console.log(output);
-      } else if (arg.length === 1) {
+        // https://mathiasbynens.be/notes/javascript-unicode#accounting-for-astral-symbols
+      } else if (Array.from(arg).length === 1) {
         // char => hex
         if (hex) {
           const hexDigit = charToHex(arg);
