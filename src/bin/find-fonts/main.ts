@@ -3,11 +3,9 @@ import url from "node:url";
 import readline from "node:readline";
 import path from "node:path";
 import cp from "node:child_process";
-import {
-  difference,
-  intersection as lodashIntersection,
-  chunk,
-} from "lodash-es";
+import difference from "lodash.difference";
+import lodashIntersection from "lodash.intersection";
+import chunk from "lodash.chunk";
 import chalk from "chalk";
 
 import { toDecimalRange, calculateNumberSet } from "../../shared/utils.js";

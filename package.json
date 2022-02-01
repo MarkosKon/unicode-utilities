@@ -1,7 +1,7 @@
 {
   "name": "unicode-utilities",
   "description": "Command line utilities to help you with Unicode/font stuff.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "license": "MIT",
   "repository": "MarkosKon/unicode-utilities",
   "type": "module",
@@ -62,10 +62,14 @@
   "dependencies": {
     "chalk": "^5.0.0",
     "commander": "^9.0.0",
-    "lodash-es": "^4.17.21"
+    "lodash.chunk": "^4.2.0",
+    "lodash.difference": "^4.5.0",
+    "lodash.intersection": "^4.4.0"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.5",
+    "@types/lodash.chunk": "^4.2.6",
+    "@types/lodash.difference": "^4.5.6",
+    "@types/lodash.intersection": "^4.4.6",
     "@types/node": "^16.7.10",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
