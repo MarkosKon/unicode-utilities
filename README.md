@@ -33,5 +33,4 @@ See the help menu below for each utility.
 
 ## Future improvements
 
-- Migrate to TypeScript
 - Add tests.

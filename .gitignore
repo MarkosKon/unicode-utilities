@@ -2,3 +2,8 @@ node_modules
 pasted-chars.txt
 google*txt
 windows*txt
+dist
+
+*tsconfig.tsbuildinfo
+eslint-config-output
+.eslintcache

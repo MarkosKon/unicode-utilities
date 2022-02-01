@@ -1,0 +1,68 @@
+{
+  "extends": [
+    "plugin:promise/recommended",
+    "plugin:unicorn/recommended",
+    "airbnb-base",
+    "airbnb-typescript/base",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "@typescript-eslint/strict-boolean-expressions": [
+      "error",
+      {
+        "allowString": true, // Discard empty strings.
+        "allowNumber": false, // Indices
+        "allowNullableObject": true, // default
+        "allowNullableBoolean": false, // default
+        "allowNullableString": false, // default
+        "allowNullableNumber": false, // default
+        "allowAny": false, // default
+        "allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing": false // default
+      }
+    ],
+    "@typescript-eslint/switch-exhaustiveness-check": "error",
+    "@typescript-eslint/sort-type-union-intersection-members": "error",
+    "@typescript-eslint/require-array-sort-compare": "error",
+    "@typescript-eslint/promise-function-async": "error",
+    "@typescript-eslint/no-unnecessary-type-arguments": "error",
+    "@typescript-eslint/no-unnecessary-qualifier": "error",
+    "@typescript-eslint/no-unnecessary-condition": "error",
+
+    // Do not check arguments because it conflicts with strict TypeScript.
+    "unicorn/no-useless-undefined": ["error", { "checkArguments": false }],
+    // It's not good for readability in many cases, even with the only-single-line option.
+    // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-ternary.md#options
+    "unicorn/prefer-ternary": "off",
+    "unicorn/prefer-spread": "off",
+    "unicorn/no-process-exit": "off",
+    "unicorn/no-array-reduce": "off",
+    "unicorn/no-array-for-each": "off",
+    "unicorn/prevent-abbreviations": [
+      "error",
+      {
+        "allowList": { "args": true }
+      }
+    ],
+    "unicorn/filename-case": [
+      "error",
+      {
+        "cases": {
+          "camelCase": true
+        }
+      }
+    ],
+    // It has false positives. We have TypeScript strict anyway,
+    // we can't change function parameters without complaints for TS.
+    // https://github.com/sindresorhus/eslint-plugin-unicorn/issues/1193
+    "unicorn/no-array-callback-reference": "off",
+
+    "import/prefer-default-export": "off",
+
+    "no-console": "off"
+  }
+}

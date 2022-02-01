@@ -1,66 +1,39 @@
-ff [options] [font_file..]
+Usage: ff [options] [font-file...]
 
 List fonts that support the given Unicode range.
 
-Positionals:
-  font-files  The font files you want to check if they support the Unicode
-              range. Tip: for faster search, consider creating a file database
-              with: 'find DIRECTORY -type f -name *ttf -print0 | xargs -0
-              printchars --separator = > fonts-db.txt'.                 [string]
+Arguments:
+  font-file                                     The font files you want to check if they support the Unicode range. For faster search, consider creating a database file with the printchars utility (which printchars). For example: 'find DIRECTORY -type f -name *ttf -print0 | xargs -0 printchars --separator = > fonts-db.txt'.
 
 Options:
-      --help                        Show help.                         [boolean]
-      --version                     Show version number.               [boolean]
-  -f, --database-file               The database file that contains (equal sign
-                                    '=' separated) the font file name, the full
-                                    font name, and the code points (the code
-                                    points comma-separated). You get all of
-                                    these if you run the printchars utility on
-                                    your font files with printchars --separator
-                                    '='.                                [string]
-  -s, --printchars-field-separator  How to separate the 3 fields that the
-                                    printchars utility outputs. I use '=' by
-                                    default to avoid problems with paths that
-                                    have spaces. It's not important what you
-                                    choose, but if your paths have spaces, avoid
-                                    the space as a separator. Also, if you use a
-                                    database file, make sure that it's the same
-                                    with the file's separator.
-                                                         [string] [default: "="]
-  -p, --partial                     Returns fonts that partially support the
-                                    given Unicode ranges.
-                                                      [boolean] [default: false]
-  -t, --partial-threshold           The percentage of the accepted character
-                                    coverage for the given Unicode ranges. It
-                                    needs the -p or --partial option for it to
-                                    work.                 [number] [default: 50]
-  -u, --unicode-ranges              The Unicode ranges to search for inside the
-                                    files or the file db.     [array] [required]
-  -V, --verbose                     Print extra information.           [boolean]
+  -u, --unicode-ranges <unicode_range...>       The Unicode ranges to search for inside the files or the file db.
+  -f, --database-file <file>                    The database file that contains (equal sign '=' separated) the font file name, the full font name, and the code points (the code points comma-separated). You get all of these if you run the printchars utility on your font files with printchars --separator '='.
+  -s, --printchars-field-separator <character>  How to separate the 3 fields that the printchars utility outputs. I use '=' by default to avoid problems with paths that have spaces. It's not important what you choose, but if your paths have spaces, avoid the space as a separator. Also, if you use a database file, make sure that it's the same with the file's separator. (default: "=")
+  -p, --partial                                 Returns fonts that partially support the given Unicode ranges. (default: false)
+  -t, --partial-threshold <percentage>          The percentage of the accepted character coverage for the given Unicode ranges. It needs the -p or --partial option for it to work. (default: 50)
+  -V, --verbose                                 Print extra information. (default: false)
+  -v, --version                                 Show the version number.
+  -h, --help                                    Show this help menu.
 
 Examples:
-  ff -f file-db.txt -u U+AA-FF              Prints which fonts from the file db
-                                            support the given Unicode ranges.
-  ff -pt 60 -f file-db.txt -u U+00-FF       Prints the fonts that cover at least
-                                            60% of the characters for the given
-                                            Unicode range.
-  find DIRECTORY -type f -name "*ttf"       Prints which of the font files
-  -print0 | xargs -0 ff -u U+41-5A 61-7A    support the given Unicode ranges.
-  U+AA-FF --                                Use -- after the -u option to denote
-                                            the end of the Unicode ranges. This
-                                            is because we have two arguments
-                                            that are variable in size: the
-                                            Unicode ranges and the fonts files.
-                                            The -u option should be last.
-  ff -u U+41-5A 61-7A U+AA-FF --            Same as above but without the find
-  DIRECTORY/*ttf                            command.
-  ff -u $(c2n --hex '&') -- fonts/*woff*    Find which of the given fonts files
-                                            have the & character. You do that
-                                            with the character to number utility
-                                            with command substitution.
-  ff -u $(c2n -h '&' ä ß б ») --            Same as above but for more
-  fonts/*woff*                              characters.
+  1) ff -f file-db.txt -u U+AA-FF
+    Prints which fonts from the file db support the given Unicode ranges.
 
-Made by Markos Konstantopoulos https://markoskon.com. For bugs and features
-requests, please open an issue at
-https://github.com/MarkosKon/unicode-utilities/issues.
+  2) ff -pt 60 -f file-db.txt -u U+00-FF
+    Prints the fonts that cover at least 60% of the characters for the given Unicode range.
+
+  3) find DIRECTORY -type f -name "*ttf" -print0 | xargs -0 ff -u U+41-5A 61-7A U+AA-FF --
+    Prints which of the font files support the given Unicode ranges. Use -- after the -u option to denote the end of the Unicode ranges. This is because we have two arguments that are variable in size: the Unicode ranges and the fonts files. The -u option should be last.
+
+  4) ff -u U+41-5A 61-7A U+AA-FF -- DIRECTORY/*ttf
+    Same as above but without the find command.
+
+  5) ff -u $(c2n --hex '&') -- fonts/*woff*
+    Find which of the given fonts files have the & character. You do that with the character to number utility with command substitution.
+
+  6) ff -u $(c2n --hex '&' ä ß б ») -- fonts/*woff*
+    Same as above but for more characters.
+
+Made by Markos Konstantopoulos (https://markoskon.com).
+For bugs and feature requests, please open an issue at https://github.com/MarkosKon/unicode-utilities/issues.
+

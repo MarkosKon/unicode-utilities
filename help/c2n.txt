@@ -1,35 +1,38 @@
-c2n [options] <args..>
+Usage: c2n [options] <args...>
 
-Returns the code points of the one-length characters you provide (<args..>). See
-the options or the examples if you want different output.
+Returns the code points of the one-length characters you provide (<args..>). See the options or the examples if you want different output.
 
-Positionals:
-  args  The characters you provide to the program. If you use the -r or
-        --reverse option you instead provide code points (and you get
-        characters). With the -h option, the numbers are not decimal code points
-        but hexadecimal Unicode codes.                                  [string]
+Arguments:
+  args               The characters you provide to the program. If you use the
+                     -r or --reverse option you instead provide code points
+                     (and you get characters). With the -x option, the numbers
+                     are not decimal code points but hexadecimal Unicode codes.
 
 Options:
-      --help           Show help.                                      [boolean]
-      --version        Show version number.                            [boolean]
-  -r, --reverse        Get the characters from the code points instead.
-                                                      [boolean] [default: false]
-  -h, --hex            The numbers will be hexadecimal instead of decimal.
-                                                      [boolean] [default: false]
-  -a, --append-u-plus  Append "U+" before the hexadecimal numbers.
-                                                      [boolean] [default: false]
-  -v, --verbose        Include extra info about the conversion in each line.
-                                                      [boolean] [default: false]
+  -r, --reverse      Get the characters from the code points instead. (default:
+                     false)
+  -x, --hex          The numbers will be hexadecimal instead of decimal.
+                     (default: false)
+  -a, --append-plus  Append "U+" before the hexadecimal numbers. (default:
+                     false)
+  -V, --verbose      Include extra info about the conversion in each line.
+                     (default: false)
+  -v, --version      Show the version number.
+  -h, --help         Show this help menu.
 
 Examples:
-  c2n {a..z}               Character to number conversion. Outputs the code
-                           points of the characters from a to z.
-  c2n -h {a..z}            Character to hex number conversion. With the -a flag
-                           it will also append U+ before the hex number.
-  c2n -r {65..75}          Number (code point) to character conversion.
-  c2n -rh e4 e5 u+e6 U+B2  Hex number to character conversion. The hex numbers
-                           can also start with U+.
+  1) c2n {a..z}
+    Character to number conversion. Outputs the code points of the characters from a to z.
 
-Made by Markos Konstantopoulos https://markoskon.com. For bugs and features
-requests, please open an issue at
-https://github.com/MarkosKon/unicode-utilities/issues.
+  2) c2n -x {a..z}
+    Character to hex number conversion. With the -a flag it will also append U+ before the hex number.
+
+  3) c2n -r {65..75}
+    Number (code point) to character conversion.
+
+  4) c2n -rx e4 e5 u+e6 U+B2
+    Hex number to character conversion. The hex numbers can also start with U+.
+
+Made by Markos Konstantopoulos (https://markoskon.com).
+For bugs and feature requests, please open an issue at https://github.com/MarkosKon/unicode-utilities/issues.
+

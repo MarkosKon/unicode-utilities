@@ -4,7 +4,7 @@
 ff $(paste -sd '\t\n' ./pasted-chars.txt | cut -f 2 | tr "\n" ",")
 ```
 
-or 
+or
 
 ```bash
 ff UNICODE_RANGE
