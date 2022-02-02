@@ -2,7 +2,7 @@ interface CommanderArguments {
   fontFiles: string[];
 }
 
-interface CommanderOptions {
+export interface CommanderOptions {
   unicodeRanges: string[];
   printcharsFieldSeparator: string;
   verbose: boolean;
@@ -11,12 +11,12 @@ interface CommanderOptions {
   databaseFile?: string;
 }
 
-type FindFontsInput = CommanderArguments & CommanderOptions;
+export type ProgramInput = CommanderArguments & CommanderOptions;
 
-interface FontDBEntry {
+export interface FontDBEntry {
   fontFile: string;
   fontFullName: string;
   numberSet: number[];
 }
 
-type EmptyObject = Record<string, never>;
+export type EmptyObject = Record<string, never>;

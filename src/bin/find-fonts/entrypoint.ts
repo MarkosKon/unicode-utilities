@@ -1,12 +1,10 @@
 #! /usr/bin/env node
-
-import chalk from "chalk";
 import { Command, Option } from "commander";
 
 import { VERSION } from "../../shared/globals.js";
+import { format, PROGRAM_NAME } from "./common.js";
 import { findFonts } from "./main.js";
-
-const PROGRAM_NAME = "ff";
+import { CommanderOptions } from "./types.js";
 
 const program = new Command();
 
@@ -27,9 +25,7 @@ program
       "The database file that contains (equal sign '=' separated) the font file name, the full font name, and the code points (the code points comma-separated). You get all of these if you run the printchars utility on your font files with printchars --separator '='."
     ).argParser((value) => {
       if (value.length === 0) {
-        console.error(
-          `${chalk.bold.red("Error:")} The database file is empty string.`
-        );
+        console.error(format("error", "the database file is an empty string."));
         process.exit(1);
       }
       return value;
@@ -58,27 +54,30 @@ program
         const percentage = Number.parseInt(value, 10);
         if (Number.isNaN(percentage)) {
           console.warn(
-            `${chalk.yellow(
-              "Warning:"
-            )} The percentage is not a number. Using the default value of ${defaultValue}`
+            format(
+              "warning",
+              `the percentage is not a number. Using the default value of ${defaultValue}.`
+            )
           );
           return defaultValue;
         }
 
         if (percentage < min) {
           console.warn(
-            `${chalk.yellow(
-              "Warning:"
-            )} The percentage is less than ${min}. Using the default value of ${defaultValue}`
+            format(
+              "warning",
+              `the percentage is less than ${min}. Using the default value of ${defaultValue}.`
+            )
           );
           return defaultValue;
         }
 
         if (percentage > max) {
           console.warn(
-            `${chalk.yellow(
-              "Warning:"
-            )} The percentage is greater than ${max}. Using the default value of ${defaultValue}`
+            format(
+              "warning",
+              `the percentage is greater than ${max}. Using the default value of ${defaultValue}.`
+            )
           );
           return max;
         }
@@ -116,5 +115,10 @@ For bugs and feature requests, please open an issue at https://github.com/Markos
   .version(VERSION, "-v, --version", "Show the version number.")
   .action((fontFiles: string[], options: CommanderOptions) => {
     findFonts({ fontFiles, ...options });
+  })
+  .configureOutput({
+    outputError: (string, write) => {
+      write(format("error", string.replace("error: ", "")));
+    },
   })
   .parse();

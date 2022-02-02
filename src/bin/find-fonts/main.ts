@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-process-exit */
 import fs from "node:fs";
 import url from "node:url";
 import readline from "node:readline";
@@ -9,6 +10,8 @@ import chunk from "lodash.chunk";
 import chalk from "chalk";
 
 import { toDecimalRange, calculateNumberSet } from "../../shared/utils.js";
+import { EmptyObject, FontDBEntry, ProgramInput } from "./types.js";
+import { format } from "./common.js";
 
 /**
  * Flattens the hex ranges from the args, in case an arg
@@ -28,16 +31,17 @@ const toFontDBEntries =
     const lineItems = line.trim().split(printcharsFieldSeparator);
 
     if (lineItems.length !== 3) {
-      console.error(
-        `${chalk.yellow(
-          "Warning:"
-        )} Not a valid line from printchars utility. The program is expecting 3 fields per line and the fields are ${
-          lineItems.length
-        } with '${printcharsFieldSeparator}' as field separator. If you used a file database, try re-creating the db with: "printchars --separator ="${
-          verbose
-            ? `. The line is: ${lineItems.toString()}`
-            : ". Use --verbose for more details."
-        }`
+      console.warn(
+        format(
+          "warning",
+          `Not a valid line from printchars utility. The program is expecting 3 fields per line and the fields are ${
+            lineItems.length
+          } with '${printcharsFieldSeparator}' as field separator. If you used a file database, try re-creating the db with: "printchars --separator =". ${
+            verbose
+              ? `The line is: ${lineItems.toString()}`
+              : "Use --verbose for more details."
+          }`
+        )
       );
       return {};
     }
@@ -77,9 +81,9 @@ const main = ({
   partial,
   partialThreshold,
   unicodeRanges: rangeArguments,
-}: FindFontsInput) => {
+}: ProgramInput) => {
   if (verbose)
-    console.error({
+    console.warn({
       state: {
         fontFiles,
         databaseFile,
@@ -93,18 +97,14 @@ const main = ({
 
   if (databaseFile === undefined && fontFiles.length === 0) {
     console.error(
-      `${chalk.bold.red(
-        "Error:"
-      )} Provide some files or a file database (with the -f option) to search. If you provided files but you're still getting this error, add -- at the end of the options, just before the files.`
+      format(
+        "error",
+        "provide some files or a file database (with the -f option) to search. If you provided files but you're still getting this error, add -- at the end of the options, just before the files."
+      )
     );
 
     process.exit(1);
   }
-
-  const handleError = (error: Error) => {
-    console.error(`\n${chalk.bold.red("Error:")} ${error.message}\n`);
-    process.exit(1);
-  };
 
   const calcPartiallySupported =
     (userSet: number[]) =>
@@ -158,11 +158,9 @@ const main = ({
       readStream.on("error", (error: Error & { code: string }) => {
         if (error.code === "ENOENT") {
           console.error(
-            `\n${chalk.bold.red(
-              "Error:"
-            )} Cannot open the database file '${databaseFile}'. \n`
+            format("error", `cannot open the database file '${databaseFile}'`)
           );
-        } else console.error(`Unexpected ReadStream error: ${error.message}`);
+        } else console.error(format("ReadStream error", error.message));
 
         process.exit(1);
       });
@@ -174,9 +172,10 @@ const main = ({
     } else {
       if (databaseFile !== undefined) {
         console.warn(
-          `${chalk.yellow(
-            "Warning:"
-          )} Ignoring database file (${databaseFile}) because you provided font files.`
+          format(
+            "warning",
+            `Ignoring database file (${databaseFile}) because you provided font files.`
+          )
         );
       }
       /**
@@ -210,15 +209,14 @@ const main = ({
           });
 
         printChars.stderr.on("data", (data) => {
-          console.error(
-            `\n${chalk.bold.red("printchars error:")} ${String(data)}`
-          );
+          console.error(format("printchars error", String(data)));
         });
       });
     }
   } catch (error) {
     if (error instanceof Error) {
-      handleError(error);
+      console.error(format("error", error.message));
+      process.exit(1);
     }
   }
 };

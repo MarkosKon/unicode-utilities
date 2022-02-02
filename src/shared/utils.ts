@@ -17,10 +17,7 @@ const getHexDigit = (string: string) => {
   const hexRegExp = /^(u\+)?(?<hexDigit>[\da-f]+)$/i;
 
   const match = string.match(hexRegExp);
-  if (!match || !match.groups)
-    throw new Error(
-      `${chalk.red.bold("Error:")} Invalid hex number: ${string}`
-    );
+  if (!match || !match.groups) throw new Error(`Invalid hex number: ${string}`);
 
   return match.groups.hexDigit;
 };
@@ -31,10 +28,7 @@ const toDecimalRange = (string: string): DecimalRange => {
   const rangeMatch = string.trim().match(rangeRegExp);
 
   if (!rangeMatch || !rangeMatch.groups) {
-    console.error(
-      `${chalk.red.bold("Error:")} Invalid decimal range: ${string}`
-    );
-    process.exit(1);
+    throw new Error(`Invalid unicode range: ${string}`);
   }
 
   const { firstHexDigit, secondHexDigit } = rangeMatch.groups;
@@ -45,12 +39,9 @@ const toDecimalRange = (string: string): DecimalRange => {
   const secondDigitIsNumber = !Number.isNaN(secondDigit);
 
   if (secondDigitIsNumber && firstDigit >= secondDigit) {
-    console.error(
-      `${chalk.red.bold(
-        "Error:"
-      )} Invalid decimal range: ${string}. First digit (${firstHexDigit}) is greater than second digit (${secondHexDigit}).`
+    throw new Error(
+      `Invalid decimal range: ${string}. First digit (${firstHexDigit}) is greater than second digit (${secondHexDigit}).`
     );
-    process.exit(1);
   }
 
   return secondDigitIsNumber ? { firstDigit, secondDigit } : { firstDigit };

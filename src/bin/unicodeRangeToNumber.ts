@@ -1,10 +1,12 @@
 #! /usr/bin/env node
 
 import chalk from "chalk";
+import { formatOutput } from "../shared/formatOutput.js";
 
 import { toDecimalRange, calculateNumberSet } from "../shared/utils.js";
 
 const PROGRAM_NAME = "ur2n";
+const format = formatOutput(PROGRAM_NAME);
 
 const areRangesInOrder = (ranges: DecimalRange[]) => {
   const areRangesInOrderInner = (currentIndex: number): boolean => {
@@ -74,37 +76,34 @@ if (
 }
 
 if (cliArguments.length === 0) {
-  console.error(
-    `${PROGRAM_NAME} ${chalk.red("(error): ")} Please provide a unicode range.`
-  );
+  console.error(format("error", "please provide a unicode range."));
   process.exit(1);
 }
 
 cliArguments.forEach((argument) => {
-  const decimalRange = argument.split(",").map(toDecimalRange);
+  try {
+    const decimalRange = argument.split(",").map(toDecimalRange);
 
-  const inputNoSpaces = argument
-    .split(",")
-    .filter(Boolean)
-    .map((item) => item.trim())
-    .join(",");
+    const inputNoSpaces = argument
+      .split(",")
+      .filter(Boolean)
+      .map((item) => item.trim())
+      .join(",");
 
-  if (decimalRange.length > 0) {
-    const rangesInOrder =
-      decimalRange.length === 1 || areRangesInOrder(decimalRange);
+    if (decimalRange.length > 0) {
+      const rangesInOrder =
+        decimalRange.length === 1 || areRangesInOrder(decimalRange);
 
-    if (rangesInOrder) {
-      const numbers = decimalRange.reduce(calculateNumberSet, []);
+      if (rangesInOrder) {
+        const numbers = decimalRange.reduce(calculateNumberSet, []);
 
-      console.log(`${inputNoSpaces} ${numbers.toString()}`);
-      return;
+        console.log(`${inputNoSpaces} ${numbers.toString()}`);
+      }
     }
+  } catch (error) {
+    process.exitCode = 1;
+    if (error instanceof Error) {
+      console.error(format("error", error.message));
+    } else console.error(format("unknown error", String(error)));
   }
-
-  console.error(
-    `${PROGRAM_NAME} ${chalk.red(
-      "(error):"
-    )} Invalid unicode range: ${inputNoSpaces}`
-  );
-  process.exit(1);
 });

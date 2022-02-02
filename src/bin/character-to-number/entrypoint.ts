@@ -4,14 +4,13 @@ import { Command } from "commander";
 
 import { characterToNumber } from "./main.js";
 import { VERSION } from "../../shared/globals.js";
+import { format, PROGRAM_NAME } from "./common.js";
+import { CommanderOptions } from "./types.js";
 
 // TODO .js extension
 // TODO import package.json
-// TODO error colors
 // throw instead of process.exit(1) outside entry points?
 // TODO: Needs tests to check for edge cases, for example, non-printable character conversion.
-
-const PROGRAM_NAME = "c2n";
 
 const program = new Command();
 
@@ -66,7 +65,12 @@ Made by Markos Konstantopoulos (https://markoskon.com).
 For bugs and feature requests, please open an issue at https://github.com/MarkosKon/unicode-utilities/issues.
 `
   )
-  .action((args: string[], options: CharacterToNumberOptions) => {
+  .action((args: string[], options: CommanderOptions) => {
     characterToNumber({ args, ...options });
+  })
+  .configureOutput({
+    outputError: (string, write) => {
+      write(format("error", string.replace("error: ", "")));
+    },
   })
   .parse();

@@ -1,5 +1,3 @@
-import chalk from "chalk";
-
 import {
   codePointToChar,
   charToCodePoint,
@@ -7,14 +5,10 @@ import {
   charToHex,
   getHexDigit,
 } from "../../shared/utils.js";
+import { format } from "./common.js";
+import { ProgramInput } from "./types.js";
 
-const main = ({
-  args,
-  reverse,
-  hex,
-  appendUPlus,
-  verbose,
-}: CharacterToNumberInput) => {
+const main = ({ args, reverse, hex, appendUPlus, verbose }: ProgramInput) => {
   args.forEach((argument) => {
     try {
       // codePoint => char
@@ -49,18 +43,13 @@ const main = ({
             : `${codePoint}`;
           console.log(output);
         }
-      } else
-        console.error(
-          `${chalk.bold.red("Error:")} Invalid character: '${argument}'`
-        );
+      } else console.error(format("error", `invalid character: '${argument}'`));
     } catch (error) {
       if (error instanceof RangeError)
-        console.error(
-          `${chalk.bold.red("Error:")} Invalid code point: ${argument}`
-        );
+        console.error(format("error", `invalid code point: ${argument}`));
       else if (error instanceof Error)
-        console.error(`${chalk.bold.red("Unknown error:")} ${error.message}`);
-      else console.error(`${chalk.bold.red("What?: ")} ${String(error)}`);
+        console.error(format("unknown error", error.message));
+      else console.error(format("super unknown error", String(error)));
     }
   });
 };
