@@ -138,7 +138,7 @@ const main = ({
     const isSubsetOfUserSet = isSubset(userSet);
     return fontDB
       .filter(isSubsetOfUserSet)
-      .map((item) => `${chalk.green(item.fontFullName)} ${item.fontFile} `);
+      .map((item) => `${chalk.green(item.fontFullName)} ${item.fontFile}`);
   };
 
   try {
@@ -191,7 +191,7 @@ const main = ({
 
         const printCharsBinary = path.resolve(
           path.dirname(url.fileURLToPath(import.meta.url)),
-          "../../../src/bin/print_chars.py"
+          "../../../../src/bin/print_chars.py"
         );
 
         const printChars = cp.spawn("python", [

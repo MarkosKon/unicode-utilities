@@ -43,8 +43,12 @@ const main = ({ args, reverse, hex, appendUPlus, verbose }: ProgramInput) => {
             : `${codePoint}`;
           console.log(output);
         }
-      } else console.error(format("error", `invalid character: '${argument}'`));
+      } else {
+        process.exitCode = 1;
+        console.error(format("error", `invalid character: '${argument}'`));
+      }
     } catch (error) {
+      process.exitCode = 1;
       if (error instanceof RangeError)
         console.error(format("error", `invalid code point: ${argument}`));
       else if (error instanceof Error)

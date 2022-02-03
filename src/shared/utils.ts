@@ -1,5 +1,3 @@
-import chalk from "chalk";
-
 const hexToDecimal = (hex: string) => Number.parseInt(hex, 16);
 const decimalToHex = (decimal: number) => decimal.toString(16);
 const charToCodePoint = (char: string) => {

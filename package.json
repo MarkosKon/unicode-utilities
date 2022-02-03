@@ -15,7 +15,7 @@
     "command-line"
   ],
   "files": [
-    "dist/**/*.js",
+    "dist/src/**/*.js",
     "src/bin/print_chars.py"
   ],
   "author": {
@@ -23,19 +23,20 @@
     "url": "https://markoskon.com"
   },
   "bin": {
-    "c2n": "./dist/bin/character-to-number/entrypoint.js",
-    "ff": "./dist/bin/find-fonts/entrypoint.js",
-    "ur2n": "./dist/bin/unicodeRangeToNumber.js",
+    "c2n": "./dist/src/bin/character-to-number/entrypoint.js",
+    "ff": "./dist/src/bin/find-fonts/entrypoint.js",
+    "ur2n": "./dist/src/bin/unicodeRangeToNumber.js",
     "printchars": "./src/bin/print_chars.py"
   },
   "scripts": {
     "dump:help": "run-p dump:c2n:help dump:ff:help dump:ur2n:help dump:printchars:help",
-    "dump:c2n:help": "node ./dist/bin/character-to-number/entrypoint.js --help > help/c2n.txt",
-    "dump:ff:help": "node ./dist/bin/find-fonts/entrypoint.js --help > help/ff.txt",
-    "dump:ur2n:help": "node ./dist/bin/unicodeRangeToNumber.js --help > help/ur2n.txt",
+    "dump:c2n:help": "node ./dist/src/bin/character-to-number/entrypoint.js --help > help/c2n.txt",
+    "dump:ff:help": "node ./dist/src/bin/find-fonts/entrypoint.js --help > help/ff.txt",
+    "dump:ur2n:help": "node ./dist/src/bin/unicodeRangeToNumber.js --help > help/ur2n.txt",
     "dump:printchars:help": "python ./src/bin/print_chars.py --help > help/printchars.txt",
     "dev": "tsc --watch",
     "build": "tsc",
+    "test": "node dist/test/test.js",
     "lint": "npm-run-all --parallel build lint:js lint:rest",
     "lint:js": "eslint --cache --ext=js,ts src",
     "lint:rest": "prettier --check \"**/*.{json,yml,md}\"",

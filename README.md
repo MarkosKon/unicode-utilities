@@ -30,7 +30,3 @@ See the help menu below for each utility.
 - [ur2n help menu](help/ur2n.txt)
 - [printchars help menu](help/printchars.txt)
 - [ff help menu](help/ff.txt)
-
-## Future improvements
-
-- Add tests.
