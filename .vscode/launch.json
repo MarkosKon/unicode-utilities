@@ -5,28 +5,34 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Python: Current File",
-      "type": "python",
-      "request": "launch",
-      "program": "${file}",
-      "console": "integratedTerminal",
-      "args": ["/e/google-fonts-repo/repo/apache/aclonica/Aclonica-Regular.ttf"]
-    },
-    {
+      "name": "ur2n",
       "type": "pwa-node",
       "request": "launch",
-      "name": "Launch Program",
+      "program": "${workspaceFolder}/src/bin/unicodeRangeToNumber.ts",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}\\bin\\ff",
-      // "args": [
-      //   "-pt",
-      //   "60",
-      //   "-f",
-      //   "windows-fonts-characters.txt",
-      //   "-u",
-      //   "E0-EE, A0-AF"
-      // ]
-      // "args": ["-pt", "60", "-f", "windows-fonts-characters.txt", "-u", "U+00-FF"]
+      "outFiles": ["${workspaceFolder}/**/*.js"],
+      "preLaunchTask": "npm: build",
+      "args": [
+        "U+20-22, U+24-3E, U+40, U+5B-5F, U+7C, U+A0, U+A7, U+A9, U+AB, U+BB, U+301, U+308, U+386, U+388-38A, U+38C, U+38E-3A1, U+3A3-3CE, U+2010-2011, U+2013-2014, U+2026, U+2030, U+20AC"
+      ]
+    },
+    {
+      "name": "c2n",
+      "type": "pwa-node",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/bin/character-to-number/entrypoint.ts",
+      "skipFiles": ["<node_internals>/**"],
+      "outFiles": ["${workspaceFolder}/**/*.js"],
+      "preLaunchTask": "npm: build",
+      "args": ["7", "H", "ώ"]
+    },
+    {
+      "name": "ff",
+      "type": "pwa-node",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/bin/find-fonts/entrypoint.ts",
+      "preLaunchTask": "npm: build",
       "args": [
         "-pt",
         "60",
@@ -35,6 +41,14 @@
         "-u",
         "U+20-22, U+24-3E, U+40, U+5B-5F, U+7C, U+A0, U+A7, U+A9, U+AB, U+BB, U+301, U+308, U+386, U+388-38A, U+38C, U+38E-3A1, U+3A3-3CE, U+2010-2011, U+2013-2014, U+2026, U+2030, U+20AC"
       ]
+    },
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "args": ["${workspaceFolder}/test/fonts/Lato-ExtraBold.ttf"]
     }
   ]
 }
