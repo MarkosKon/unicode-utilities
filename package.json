@@ -1,7 +1,7 @@
 {
   "name": "unicode-utilities",
   "description": "Command line utilities to help you with Unicode/font stuff.",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "license": "MIT",
   "repository": "MarkosKon/unicode-utilities",
   "type": "module",
