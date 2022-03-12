@@ -6,7 +6,7 @@ import chalk from "chalk";
 import { spawnPromise, handleError } from "./helpers.js";
 
 {
-  const test = "$c2n {a..z} works";
+  const test = "$ c2n {a..z} works";
 
   spawnPromise({
     command: "node",
@@ -32,7 +32,7 @@ import { spawnPromise, handleError } from "./helpers.js";
 }
 
 {
-  const test = "$c2n -x {a..z} works";
+  const test = "$ c2n -x {a..z} works";
 
   spawnPromise({
     command: "node",
@@ -59,7 +59,7 @@ import { spawnPromise, handleError } from "./helpers.js";
 }
 
 {
-  const test = "$c2n -r {65..75} works";
+  const test = "$ c2n -r {65..75} works";
 
   spawnPromise({
     command: "node",
@@ -83,7 +83,7 @@ import { spawnPromise, handleError } from "./helpers.js";
 }
 
 {
-  const test = "$c2n -rx e4 e5 u+e6 U+B2 works";
+  const test = "$ c2n -rx e4 e5 u+e6 U+B2 works";
 
   spawnPromise({
     command: "node",
@@ -110,7 +110,7 @@ import { spawnPromise, handleError } from "./helpers.js";
 }
 
 {
-  const test = "$ur2n AA works";
+  const test = "$ ur2n AA works";
 
   spawnPromise({
     command: "node",
@@ -130,7 +130,7 @@ import { spawnPromise, handleError } from "./helpers.js";
 }
 
 {
-  const test = "$ur2n AA-FF works";
+  const test = "$ ur2n AA-FF works";
 
   spawnPromise({
     command: "node",
@@ -153,7 +153,7 @@ import { spawnPromise, handleError } from "./helpers.js";
 }
 
 {
-  const test = "$ur2n u+365 works";
+  const test = "$ ur2n u+365 works";
 
   spawnPromise({
     command: "node",
@@ -361,7 +361,7 @@ LatoExtraBoldItalic ${path.resolve("./test/fonts/Lato-ExtraBoldItalic.ttf")}\n`
 }
 
 {
-  const test = "$ff -u $(c2n --hex '&' ä ß б ») -- fonts/*woff*";
+  const test = "$ ff -u $(c2n --hex '&' ä ß б ») -- fonts/*woff*";
 
   spawnPromise({
     command:
