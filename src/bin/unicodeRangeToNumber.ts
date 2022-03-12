@@ -58,7 +58,7 @@ ${chalk.bold("EXAMPLES:")}
   ${PROGRAM_NAME} U+AA-FF             Prints the code points for a unicode range
                            with a U+ prefix.
   ${PROGRAM_NAME} "U+AA-FF, 400-500"  Prints the code points for a complex range.
-  ${PROGRAM_NAME} U+AA-FF, 400-500    (todo) Prints the code points for multiple ranges.
+  ${PROGRAM_NAME} U+AA-FF, 400-500    Prints the code points for multiple ranges.
   ${PROGRAM_NAME} U+AA-FF 400-500     Prints the code points for multiple ranges.
 
 Made by Markos Konstantopoulos https://markoskon.com. For bugs and new
