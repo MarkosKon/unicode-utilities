@@ -130,6 +130,70 @@ import { spawnPromise, handleError } from "./helpers.js";
 }
 
 {
+  const test = "Exits with error with out of order range 'FF-AA'";
+
+  spawnPromise({
+    command: "node",
+    args: ["./dist/src/bin/unicodeRangeToNumber.js", "FF-AA"],
+  })
+    .then((result) => {
+      const { stdout, stderr, exitCode } = result;
+
+      assert(stdout === "");
+      assert(stderr.includes("Invalid decimal range"));
+      assert(exitCode === 1);
+
+      console.log(`${chalk.green("✓")} ${test} passed`);
+      return result;
+    })
+    .catch(handleError(test));
+}
+
+{
+  const test = "Exits with error with out of order range 'AA-FF, 00-20'";
+
+  spawnPromise({
+    command: "node",
+    args: ["./dist/src/bin/unicodeRangeToNumber.js", "400", "AA-FF, 00-20"],
+  })
+    .then((result) => {
+      const { stdout, stderr, exitCode } = result;
+
+      assert(stdout === "400 1024\n");
+      assert(stderr.includes("unicode range is out of order"));
+      assert(exitCode === 1);
+
+      console.log(
+        `${chalk.green("✓")} ${test} passed, but ${chalk.yellow(
+          "TODO"
+        )} should sort the range eventually.`
+      );
+      return result;
+    })
+    .catch(handleError(test));
+}
+
+{
+  const test = "Exits with error with empty range ''";
+
+  spawnPromise({
+    command: "node",
+    args: ["./dist/src/bin/unicodeRangeToNumber.js", ""],
+  })
+    .then((result) => {
+      const { stdout, stderr, exitCode } = result;
+
+      assert(stdout === "");
+      assert(stderr.includes("unicode range is empty"));
+      assert(exitCode === 1);
+
+      console.log(`${chalk.green("✓")} ${test} passed`);
+      return result;
+    })
+    .catch(handleError(test));
+}
+
+{
   const test = "$ ur2n AA-FF works";
 
   spawnPromise({
@@ -220,33 +284,27 @@ import { spawnPromise, handleError } from "./helpers.js";
 }
 
 {
-  const test =
-    "ur2n works with multiple comma-separated + space-separated arguments";
+  const test = "ur2n works with dangling comma in the range.";
 
   spawnPromise({
     command: "node",
     args: ["./dist/src/bin/unicodeRangeToNumber.js", "U+60-0070,", "400-410"],
   })
     .then((result) => {
-      // const { stdout, stderr, exitCode } = result;
+      const { stdout, stderr, exitCode } = result;
 
-      // assert(
-      //   stdout ===
-      //     "U+60-0070,400-410 96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,1024,1025,1026,1027,1028,1029,1030,1031,1032,1033,1034,1035,1036,1037,1038,1039,1040\n"
-      // );
-      // assert(stderr === "");
-      // assert(exitCode === 0);
+      assert(
+        stdout ===
+          "U+60-0070 96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112\n" +
+            "400-410 1024,1025,1026,1027,1028,1029,1030,1031,1032,1033,1034,1035,1036,1037,1038,1039,1040\n"
+      );
+      assert(stderr === "");
+      assert(exitCode === 0);
 
-      console.log(`${chalk.yellow("TODO")} ${test}`);
-      // console.log(`${chalk.green("✓")} ${test} passed`);
+      console.log(`${chalk.green("✓")} ${test} passed`);
       return result;
     })
     .catch(handleError(test));
-}
-
-{
-  const test = "ur2n 400-410,60-70 => sorts them";
-  console.log(`${chalk.yellow("TODO")} ${test}`);
 }
 
 {

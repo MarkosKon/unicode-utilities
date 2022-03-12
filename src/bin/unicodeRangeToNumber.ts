@@ -82,7 +82,10 @@ if (cliArguments.length === 0) {
 
 cliArguments.forEach((argument) => {
   try {
-    const decimalRange = argument.split(",").map(toDecimalRange);
+    const decimalRange = argument
+      .split(",")
+      .filter(Boolean) // In case there is a dangling comma.
+      .map(toDecimalRange);
 
     const inputNoSpaces = argument
       .split(",")
@@ -94,11 +97,23 @@ cliArguments.forEach((argument) => {
       const rangesInOrder =
         decimalRange.length === 1 || areRangesInOrder(decimalRange);
 
+      // Note: If single range is not in order (e.g. FF-AA), it throws and goes to catch.
+      // It goes to else if multiple ranges are not in order, e.g. AA-FF, 00-20, something
+      // the `toDecimalRange` doesn't know.
       if (rangesInOrder) {
         const numbers = decimalRange.reduce(calculateNumberSet, []);
 
         console.log(`${inputNoSpaces} ${numbers.toString()}`);
+      } else {
+        console.error(
+          format("error", `unicode range is out of order '${inputNoSpaces}'`)
+        );
+        process.exitCode = 1;
       }
+      // This gets visited if `ur2n ""` or `ur2n "AA-FF" ""`.
+    } else {
+      console.error(format("error", `unicode range is empty '${argument}'.`));
+      process.exitCode = 1;
     }
   } catch (error) {
     process.exitCode = 1;
