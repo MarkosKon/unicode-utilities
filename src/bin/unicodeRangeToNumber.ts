@@ -82,13 +82,15 @@ if (cliArguments.length === 0) {
 
 cliArguments.forEach((argument) => {
   try {
+    const separatorRegExp = /[\s,]+/;
+
     const decimalRange = argument
-      .split(",")
+      .split(separatorRegExp)
       .filter(Boolean) // In case there is a dangling comma.
       .map(toDecimalRange);
 
     const inputNoSpaces = argument
-      .split(",")
+      .split(separatorRegExp)
       .filter(Boolean)
       .map((item) => item.trim())
       .join(",");

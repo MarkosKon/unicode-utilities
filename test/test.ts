@@ -284,6 +284,71 @@ import { spawnPromise, handleError } from "./helpers.js";
 }
 
 {
+  const test = "ur2n works with single space-separated argument";
+
+  spawnPromise({
+    command: "node",
+    args: ["./dist/src/bin/unicodeRangeToNumber.js", "10-15 A-F"],
+  })
+    .then((result) => {
+      const { stdout, stderr, exitCode } = result;
+
+      assert(stdout === "10-15,A-F 16,17,18,19,20,21,10,11,12,13,14,15\n");
+      assert(stderr === "");
+      assert(exitCode === 0);
+
+      console.log(`${chalk.green("✓")} ${test} passed`);
+      return result;
+    })
+    .catch(handleError(test));
+}
+
+{
+  const test = "ur2n works with irregular space-separated argument";
+
+  spawnPromise({
+    command: "node",
+    args: ["./dist/src/bin/unicodeRangeToNumber.js", "10-15    A-F B0"],
+  })
+    .then((result) => {
+      const { stdout, stderr, exitCode } = result;
+
+      assert(
+        stdout === "10-15,A-F,B0 16,17,18,19,20,21,10,11,12,13,14,15,176\n"
+      );
+      assert(stderr === "");
+      assert(exitCode === 0);
+
+      console.log(`${chalk.green("✓")} ${test} passed`);
+      return result;
+    })
+    .catch(handleError(test));
+}
+
+{
+  const test = "ur2n works with space-separated and comma-separated argument";
+
+  spawnPromise({
+    command: "node",
+    args: ["./dist/src/bin/unicodeRangeToNumber.js", "10-15 A-F, C0-C4"],
+  })
+    .then((result) => {
+      const { stdout, stderr, exitCode } = result;
+
+      assert(
+        stdout ===
+          "10-15,A-F,C0-C4 16,17,18,19,20,21,10,11,12,13,14,15,192,193,194,195,196\n"
+      );
+      assert(stderr === "");
+      assert(exitCode === 0);
+
+      console.log(`${chalk.green("✓")} ${test} passed`);
+      return result;
+    })
+    .catch(handleError(test));
+}
+
+{
   const test = "ur2n works with dangling comma in the range.";
 
   spawnPromise({
