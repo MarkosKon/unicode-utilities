@@ -38,7 +38,7 @@ const toDecimalRange = (string: string): DecimalRange => {
 
   if (secondDigitIsNumber && firstDigit >= secondDigit) {
     throw new Error(
-      `Invalid decimal range: ${string}. First digit (${firstHexDigit}) is greater than second digit (${secondHexDigit}).`
+      `Invalid decimal range: ${string}. First digit (${firstHexDigit}) is greater or equal to second digit (${secondHexDigit}).`
     );
   }
 
