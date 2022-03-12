@@ -14,7 +14,8 @@ POSITIONALS:
                            ur2n aa-ff 00-ff.
 
 OPTIONS:
-  -h, --help, help         Show help.   [boolean]
+  -h, --help, help         Show help.               [boolean]
+  -v, --version            Show the version number. [boolean]
 
 EXAMPLES:
   ur2n AA                  Prints the code points for a single

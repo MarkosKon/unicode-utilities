@@ -1,8 +1,9 @@
 #! /usr/bin/env node
 
 import chalk from "chalk";
-import { formatOutput } from "../shared/formatOutput.js";
 
+import { formatOutput } from "../shared/formatOutput.js";
+import { VERSION } from "../shared/globals.js";
 import { toDecimalRange, calculateNumberSet } from "../shared/utils.js";
 
 const PROGRAM_NAME = "ur2n";
@@ -47,7 +48,8 @@ ${chalk.bold("POSITIONALS:")}
                            ${PROGRAM_NAME} aa-ff 00-ff.
 
 ${chalk.bold("OPTIONS:")}
-  -h, --help, help         Show help.   [boolean]
+  -h, --help, help         Show help.               [boolean]
+  -v, --version            Show the version number. [boolean]
 
 ${chalk.bold("EXAMPLES:")}
   ${PROGRAM_NAME} AA                  Prints the code points for a single
@@ -72,6 +74,11 @@ if (
   cliArguments.some((argument) => ["-h", "--help", "help"].includes(argument))
 ) {
   showHelp();
+  process.exit(0);
+}
+
+if (cliArguments.some((argument) => ["-v", "--version"].includes(argument))) {
+  console.log(VERSION);
   process.exit(0);
 }
 
@@ -107,10 +114,14 @@ cliArguments.forEach((argument) => {
 
         console.log(`${inputNoSpaces} ${numbers.toString()}`);
       } else {
-        console.error(
-          format("error", `unicode range is out of order '${inputNoSpaces}'`)
+        const sortedNumbers = decimalRange
+          .reduce(calculateNumberSet, [])
+          .sort((a, b) => a - b);
+        const numberSet = Array.from(new Set(sortedNumbers));
+
+        console.log(
+          `${chalk.yellow("(sorted)")}${inputNoSpaces} ${numberSet.toString()}`
         );
-        process.exitCode = 1;
       }
       // This gets visited if `ur2n ""` or `ur2n "AA-FF" ""`.
     } else {

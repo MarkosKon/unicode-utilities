@@ -130,7 +130,7 @@ import { spawnPromise, handleError } from "./helpers.js";
 }
 
 {
-  const test = "Exits with error with out of order range 'FF-AA'";
+  const test = "ur2n exits with error with out of order range 'FF-AA'";
 
   spawnPromise({
     command: "node",
@@ -150,7 +150,29 @@ import { spawnPromise, handleError } from "./helpers.js";
 }
 
 {
-  const test = "Exits with error with out of order range 'AA-FF, 00-20'";
+  const test =
+    "ur2n exits with error with out of order range that also includes a good range. '00-20 FF-AA' 500. It also prints the good range in stdout.";
+
+  spawnPromise({
+    command: "node",
+    args: ["./dist/src/bin/unicodeRangeToNumber.js", "00-20 FF-AA", "500"],
+  })
+    .then((result) => {
+      const { stdout, stderr, exitCode } = result;
+
+      assert(stdout === "500 1280\n");
+      assert(stderr.includes("Invalid decimal range"));
+      assert(exitCode === 1);
+
+      console.log(`${chalk.green("✓")} ${test} passed`);
+      return result;
+    })
+    .catch(handleError(test));
+}
+
+{
+  const test =
+    "ur2n sorts an out of order range and keeps unique decimals: ur2n 400 'AA-FF, 00-20'";
 
   spawnPromise({
     command: "node",
@@ -159,22 +181,22 @@ import { spawnPromise, handleError } from "./helpers.js";
     .then((result) => {
       const { stdout, stderr, exitCode } = result;
 
-      assert(stdout === "400 1024\n");
-      assert(stderr.includes("unicode range is out of order"));
-      assert(exitCode === 1);
-
-      console.log(
-        `${chalk.green("✓")} ${test} passed, but ${chalk.yellow(
-          "TODO"
-        )} should sort the range eventually.`
+      assert(
+        stdout ===
+          "400 1024\n" +
+            "(sorted)AA-FF,00-20 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255\n"
       );
+      assert(stderr === "");
+      assert(exitCode === 0);
+
+      console.log(`${chalk.green("✓")} ${test} passed`);
       return result;
     })
     .catch(handleError(test));
 }
 
 {
-  const test = "Exits with error with empty range ''";
+  const test = "ur2n exits with error with empty range ''";
 
   spawnPromise({
     command: "node",
