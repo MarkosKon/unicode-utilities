@@ -110,6 +110,50 @@ import { spawnPromise, handleError } from "./helpers.js";
 }
 
 {
+  const test = "$ c2n -x 😴 prints 1f634 (emoji)";
+
+  spawnPromise({
+    command: "node",
+    args: ["./dist/src/bin/character-to-number/entrypoint.js", "-x", "😴"],
+  })
+    .then((result) => {
+      const { stdout, stderr, exitCode } = result;
+
+      assert(stdout === "1f634\n");
+      assert(stderr === "");
+      assert(exitCode === 0);
+
+      console.log(`${chalk.green("✓")} ${test} passed`);
+      return result;
+    })
+    .catch(handleError(test));
+}
+
+{
+  const test = "$ c2n -rx u+1f60d prints 😍 (reverse emoji)";
+
+  spawnPromise({
+    command: "node",
+    args: [
+      "./dist/src/bin/character-to-number/entrypoint.js",
+      "-rx",
+      "u+1f60d",
+    ],
+  })
+    .then((result) => {
+      const { stdout, stderr, exitCode } = result;
+
+      assert(stdout === "😍\n");
+      assert(stderr === "");
+      assert(exitCode === 0);
+
+      console.log(`${chalk.green("✓")} ${test} passed`);
+      return result;
+    })
+    .catch(handleError(test));
+}
+
+{
   const test = "$ ur2n AA works";
 
   spawnPromise({
