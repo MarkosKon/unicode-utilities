@@ -6,7 +6,7 @@
   "repository": "MarkosKon/unicode-utilities",
   "type": "module",
   "engines": {
-    "node": ">=12"
+    "node": ">=12.20.0"
   },
   "keywords": [
     "unicode",
